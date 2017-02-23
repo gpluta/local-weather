@@ -40,12 +40,14 @@ export default Ember.Route.extend({
   setupController(controller) {
     this._super(...arguments);
 
+    // Pass the last search string to the template, so we can fill the input on reload
     controller.setProperties({
       lastSearch: this.get('lastSearch')
     });
   },
 
   actions: {
+    // This action handles the actual search, by setting the qp on `index` route
     transitionToSearch(search) {
       this.transitionTo('application', {queryParams: {search: search}});
     }

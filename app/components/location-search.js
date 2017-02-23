@@ -10,10 +10,12 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    // This action is fired on enter keypress while focusing in the input
     handleEnterOnInput(e) {
       this.sendAction('performSearch', e);
     },
 
+    // This action is fired when the search icon is clicked
     search() {
       let searchValue = $('#location-search-input').val();
       if (searchValue) {

@@ -3,14 +3,12 @@
     {{fa-icon "search" size="lg"}}
   </button>
 
-
   {{input
     placeholder="Enter a city name..."
     id="location-search-input"
     value=lastSearch
     enter="handleEnterOnInput"
   }}
-
 
   <div class="search-history">
     {{#if lru.memory.length}}
