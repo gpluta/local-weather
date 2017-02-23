@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'local-weather',
     environment: environment,
-    rootURL: '/',
+    rootURL: '/local-weather',
     locationType: 'hash',
     EmberENV: {
       FEATURES: {
