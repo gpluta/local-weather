@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-  limit: 10,
+  limit: 5,
   lsKey: 'weatherAppCache',
 
   init() {
