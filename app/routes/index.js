@@ -3,6 +3,8 @@ import fetch from 'fetch';
 import config from '../config/environment';
 
 export default Ember.Route.extend({
+  lru: Ember.inject.service('search-cache'),
+
   queryParams: {
     search: {
       refreshModel: true
@@ -12,20 +14,25 @@ export default Ember.Route.extend({
   model(params) {
     let qp = $.param({
       appid: config.apiKey,
-      q: params.search
+      q: params.search,
+      units: 'metric',
+      type: 'accurate'
     });
 
     this.set('lastSearch', params.search);
 
     // Search for available cities
-    return fetch('http://api.openweathermap.org/data/2.5/weather?' + qp)
+    return fetch('http://api.openweathermap.org/data/2.5/find?' + qp)
       .then(response => response.json());
   },
 
   lastSearch: '',
 
   afterModel(model) {
-    console.log('afterModel', model, 'asd', model.name);
+    if (model.cod == 200 && model.count > 0) {
+      // Save only queries that yielded one or more result (and did not cause an error...)
+      this.get('lru').add(this.get('lastSearch'));
+    }
   },
 
   setupController(controller, model) {
@@ -39,7 +46,6 @@ export default Ember.Route.extend({
 
   actions: {
     transitionToSearch(search) {
-      console.log('test action in application route: ', search);
       this.transitionTo('application', {queryParams: {search: search}});
     }
   }

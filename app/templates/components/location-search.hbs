@@ -1,6 +1,20 @@
-{{input
-  placeholder='Enter a city name...'
-  id='location-search-input'
-  value=lastSearch
-  enter='handleEnterOnInput'
-}}
+<div class="location-search-wrap">
+  {{input
+    placeholder='Enter a city name...'
+    id='location-search-input'
+    value=lastSearch
+    enter='handleEnterOnInput'
+  }}
+
+  <div class="search-history">
+    {{#if lru.memory.length}}
+      <div class="history-clear">
+        <button class="clear-history-action" {{action "clearHistory"}}>clear history</button>
+      </div>
+    {{/if}}
+
+    {{#each reversedLruArray as |element|}}
+      {{#link-to "index" (query-params search=element) class="history-element"}}{{element}}{{/link-to}}
+    {{/each}}
+  </div>
+</div>

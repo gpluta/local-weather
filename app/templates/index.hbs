@@ -3,6 +3,15 @@
   lastSearch=lastSearch
 }}
 
-<hr>
-city found: {{foundCity}}
-<hr>
+<div class="results">
+
+  {{#if model.count}}
+    {{#each model.list as |city|}}
+      {{weather-box
+        city=city
+      }}
+    {{/each}}
+  {{else}}
+    <span>City not found :(</span>
+  {{/if}}
+</div>

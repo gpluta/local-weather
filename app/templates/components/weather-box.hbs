@@ -1,1 +1,20 @@
-{{yield}}
+<div class="weather-box__name">{{city.name}}, {{city.sys.country}}</div>
+<div class="weather-box__icons">
+  {{#each city.weather as |weather|}}
+    <img src="http://openweathermap.org/img/w/{{weather.icon}}.png" alt="">
+  {{/each}}
+</div>
+
+<div>temperature: {{city.main.temp}} &deg;C</div>
+<div>clouds: {{city.clouds.all}} %</div>
+<div>humidity: {{city.main.humidity}} %</div>
+<div>pressure: {{city.main.pressure}} hPa</div>
+
+<iframe
+  width="100%"
+  height="200"
+  class="weather-box__map"
+  frameborder="0"
+  src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDTlfiezZxoBlg_BzmNW7q-92wt7oN88bU&center={{city.coord.lat}},{{city.coord.lon}}&zoom=8&maptype=roadmap" allowfullscreen></iframe>
+
+
