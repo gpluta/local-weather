@@ -5,7 +5,7 @@ export default Ember.Service.extend({
   lsKey: 'weatherAppCache',
 
   init() {
-    let weatherAppCache = localStorage.getItem(this.get('lsKey'));
+    let weatherAppCache = this._getFromLs();
     // Check for localStorage entries
     if (weatherAppCache) {
       // Prepare for invalid JSON
@@ -20,11 +20,21 @@ export default Ember.Service.extend({
     }
   },
 
+  /**
+   * Check the index of a possible duplicate element
+   * @param value
+   * @returns {number} - the index
+   */
   getDuplicateIndex(value) {
     return this.memory.indexOf(value);
   },
 
+  /**
+   * Add an element to the beginning of the list
+   * @param value
+   */
   add(value) {
+    value = String(value);
     // First check for duplicates
     if (this.getDuplicateIndex(value) !== -1) {
       //Remove the duplicate
@@ -49,11 +59,34 @@ export default Ember.Service.extend({
     this._clearLs();
   },
 
+  removeElementByIndex(index) {
+    // This must be done this way (not using `splice()` in order to trigger observer)
+    this.set('memory', this.get('memory').filter((e,i) => i !== index));
+    this._persistToLS();
+  },
+
+  /**
+   * Clear local storage
+   * @private
+   */
   _clearLs() {
     localStorage.removeItem(this.get('lsKey'));
   },
 
-  _persistToLS() {
+  /**
+   * Get the list from local storage
+   * @private
+   */
+  _getFromLs() {
+    return localStorage.getItem(this.get('lsKey'));
+  },
+
+  /**
+   * Persist the list to local storagr
+   * @private
+   */
+  _persistToLS()
+  {
     localStorage.setItem(this.get('lsKey'), JSON.stringify(this.get('memory')));
   }
 });

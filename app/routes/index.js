@@ -22,14 +22,16 @@ export default Ember.Route.extend({
     this.set('lastSearch', params.search);
 
     // Search for available cities
-    return fetch('http://api.openweathermap.org/data/2.5/find?' + qp)
-      .then(response => response.json());
+    if (params.search) {
+      return fetch('http://api.openweathermap.org/data/2.5/find?' + qp)
+        .then(response => response.json());
+    }
   },
 
   lastSearch: '',
 
   afterModel(model) {
-    if (model.cod == 200 && model.count > 0) {
+    if (model && model.cod == 200 && model.count > 0) {
       // Save only queries that yielded one or more result (and did not cause an error...)
       this.get('lru').add(this.get('lastSearch'));
     }
@@ -39,7 +41,6 @@ export default Ember.Route.extend({
     this._super(...arguments);
 
     controller.setProperties({
-      foundCity: model.name,
       lastSearch: this.get('lastSearch')
     });
   },

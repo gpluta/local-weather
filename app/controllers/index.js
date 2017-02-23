@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
 
   actions: {
     performSearch(e) {
-      this.set('search', e)
+      this.set('search', e);
     }
   }
 });

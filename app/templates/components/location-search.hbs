@@ -1,20 +1,30 @@
 <div class="location-search-wrap">
+  <button class="input-search-icon" {{action "search"}}>
+    {{fa-icon "search" size="lg"}}
+  </button>
+
+
   {{input
-    placeholder='Enter a city name...'
-    id='location-search-input'
+    placeholder="Enter a city name..."
+    id="location-search-input"
     value=lastSearch
-    enter='handleEnterOnInput'
+    enter="handleEnterOnInput"
   }}
+
 
   <div class="search-history">
     {{#if lru.memory.length}}
       <div class="history-clear">
-        <button class="clear-history-action" {{action "clearHistory"}}>clear history</button>
+        <button class="clear-history-action" {{action "clearHistory"}}>clear whole history</button>
       </div>
     {{/if}}
 
-    {{#each reversedLruArray as |element|}}
-      {{#link-to "index" (query-params search=element) class="history-element"}}{{element}}{{/link-to}}
+    {{#each reversedLruArray as |element index|}}
+      <div class="history-element">
+
+        {{#link-to "index" (query-params search=element)}}{{element}}{{/link-to}}
+        <button class="remove-element-button" {{action "removeHistoryItem" index}}>remove item</button>
+      </div>
     {{/each}}
   </div>
 </div>
