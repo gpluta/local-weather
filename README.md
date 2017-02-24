@@ -12,4 +12,4 @@ DEMO of the working app is available here: [http://unsecure.commodum.pl/local-we
 - The cache is persisted to localStorage, so you can view your search history after a page reload. localStorage is nicely synchronised when you clean the whole cache or each element individually.
 - Each history position can be deleted individualy or the whole history can be deleted. Check out the controls on the search list.
 ---
-**CAUTION!** The openweathermap api tends to be slow at times and tends to timout too. It is not always like that, but sometimes the UX is pretty unpleasant :( 
+**CAUTION!** The openweathermap api tends to be slow at times and tends to timeout too. It is not always like that, but sometimes the UX is pretty unpleasant :( 
