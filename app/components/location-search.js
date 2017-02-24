@@ -5,10 +5,6 @@ export default Ember.Component.extend({
 
   classNames: ['location-search'],
 
-  reversedLruArray: Ember.computed('lru.memory.@each', function () {
-    return this.get('lru.memory');
-  }),
-
   actions: {
     // This action is fired on enter keypress while focusing in the input
     handleEnterOnInput(e) {
