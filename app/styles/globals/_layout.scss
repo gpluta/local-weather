@@ -70,3 +70,8 @@ footer .footer {
   align-items: center;
   flex-wrap: wrap;
 }
+
+.flex-reverse-rows {
+  display: flex;
+  flex-direction: column-reverse;
+}

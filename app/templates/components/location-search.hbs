@@ -17,12 +17,13 @@
       </div>
     {{/if}}
 
-    {{#each reversedLruArray as |element index|}}
-      <div class="history-element">
-
-        {{#link-to "index" (query-params search=element)}}{{element}}{{/link-to}}
-        <button class="remove-element-button" {{action "removeHistoryItem" index}}>remove item</button>
-      </div>
-    {{/each}}
+    <div class="flex-reverse-rows">
+      {{#each reversedLruArray as |element index|}}
+        <div class="history-element">
+          {{#link-to "index" (query-params search=element)}}{{element}}{{/link-to}}
+          <button class="remove-element-button" {{action "removeHistoryItem" index}}>remove item</button>
+        </div>
+      {{/each}}
+    </div>
   </div>
 </div>

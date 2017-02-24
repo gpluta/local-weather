@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   classNames: ['location-search'],
 
   reversedLruArray: Ember.computed('lru.memory.@each', function () {
-    return this.get('lru.memory').reverse();
+    return this.get('lru.memory');
   }),
 
   actions: {

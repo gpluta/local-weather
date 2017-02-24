@@ -50,7 +50,7 @@ export default Ember.Service.extend({
     // Push the value to memory
     this.memory.push(value);
 
-    // Persist to localstorage
+    // Persist to localStorage
     this._persistToLS();
   },
 
@@ -74,7 +74,7 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Get the list from local storage
+   * Get the list from localStorage
    * @private
    */
   _getFromLs() {
@@ -82,7 +82,7 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Persist the list to local storagr
+   * Persist the list to localStorage
    * @private
    */
   _persistToLS()
