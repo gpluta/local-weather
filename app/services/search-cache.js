@@ -30,7 +30,7 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Add an element to the beginning of the list
+   * Push an element to the list
    * @param value
    */
   add(value) {
